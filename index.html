@@ -205,6 +205,24 @@
             border: 1px solid #E5E7EB;
         }
         
+        .mobile-demo-wrapper {
+            max-width: 428px;
+            margin: 0 auto;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-demo-wrapper {
+                max-width: 100%;
+                border-radius: 0;
+                border-left: none;
+                border-right: none;
+            }
+        }
+        
         .code-block {
             background: #1F2937;
             color: #F9FAFB;
@@ -1830,6 +1848,7 @@
             const [mobileTime, setMobileTime] = useState('16:00');
             const [mobileSelectedContact, setMobileSelectedContact] = useState('홍길동');
             const [mobileLoadMethod, setMobileLoadMethod] = useState('지게차');
+            const [mobileInputValue, setMobileInputValue] = useState('');
             
             // 카테고리 토글 함수
             const toggleCategory = (categoryId) => {
@@ -4560,7 +4579,7 @@ import { InfoRow } from './components/InfoRow';
                                     <p className="component-description">{comp?.description}</p>
                                 </div>
                                 <div className="component-demo">
-                                    <div style={{ maxWidth: '428px', margin: '0 auto', border: `1px solid ${colors.gray[200]}`, borderRadius: '8px', overflow: 'hidden' }}>
+                                    <div className="mobile-demo-wrapper">
                                         <MobileHeader 
                                             title="운송신청" 
                                             onBack={() => alert('뒤로가기')}
@@ -4594,7 +4613,7 @@ import { MobileHeader } from './components/mobile/MobileHeader';
                                     <p className="component-description">{comp?.description}</p>
                                 </div>
                                 <div className="component-demo">
-                                    <div style={{ maxWidth: '428px', margin: '0 auto', border: `1px solid ${colors.gray[200]}`, borderRadius: '8px', overflow: 'hidden' }}>
+                                    <div className="mobile-demo-wrapper">
                                         <HorizontalTabs tabs={tabs} activeIndex={mobileTabIndex} onChange={setMobileTabIndex} />
                                     </div>
                                     <CodeExample code={`// HorizontalTabs 컴포넌트 사용 예제
@@ -4631,7 +4650,7 @@ function MyComponent() {
                                     <p className="component-description">{comp?.description}</p>
                                 </div>
                                 <div className="component-demo">
-                                    <div style={{ maxWidth: '428px', margin: '0 auto', padding: '16px' }}>
+                                    <div className="mobile-demo-wrapper" style={{ padding: '16px' }}>
                                         <div style={{ marginBottom: '24px' }}>
                                             <MobileSectionHeader label="온도 구분" required />
                                             <ChipButtonGroup
@@ -4687,7 +4706,6 @@ const [vehicleTypes, setVehicleTypes] = useState([]);
                     }
                     case 'mobile-input': {
                         const comp = allComponents.find(c => c.id === activeSection);
-                        const [inputValue, setInputValue] = useState('');
                         return (
                             <div className="component-section">
                                 <div className="component-header">
@@ -4695,11 +4713,11 @@ const [vehicleTypes, setVehicleTypes] = useState([]);
                                     <p className="component-description">{comp?.description}</p>
                                 </div>
                                 <div className="component-demo">
-                                    <div style={{ maxWidth: '428px', margin: '0 auto', padding: '16px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                                    <div className="mobile-demo-wrapper" style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
                                         <MobileInput
                                             placeholder="회사명을 입력하세요"
-                                            value={inputValue}
-                                            onChange={(e) => setInputValue(e.target.value)}
+                                            value={mobileInputValue}
+                                            onChange={(e) => setMobileInputValue(e.target.value)}
                                         />
                                         <MobileInput
                                             value="010-8697-9823"
@@ -4746,7 +4764,7 @@ import { Phone } from 'lucide-react';
                                     <p className="component-description">{comp?.description}</p>
                                 </div>
                                 <div className="component-demo">
-                                    <div style={{ maxWidth: '428px', margin: '0 auto', padding: '16px' }}>
+                                    <div className="mobile-demo-wrapper" style={{ padding: '16px' }}>
                                         <MobileSectionHeader label="하차 날짜 및 시간" required />
                                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                                             <MobileDateTimePicker
@@ -4802,7 +4820,7 @@ import { MobileDateTimePicker } from './components/mobile/MobileDateTimePicker';
                                     <p className="component-description">{comp?.description}</p>
                                 </div>
                                 <div className="component-demo">
-                                    <div style={{ maxWidth: '428px', margin: '0 auto', border: `1px solid ${colors.gray[200]}`, borderRadius: '8px', overflow: 'hidden', position: 'relative', minHeight: '200px' }}>
+                                    <div className="mobile-demo-wrapper" style={{ position: 'relative', minHeight: '200px' }}>
                                         <div style={{ padding: '16px', paddingBottom: '80px' }}>
                                             <p style={{ color: colors.gray[600] }}>컨텐츠 영역입니다. 하단 버튼이 고정되어 있습니다.</p>
                                         </div>
@@ -4838,7 +4856,7 @@ import { BottomFixedButton } from './components/mobile/BottomFixedButton';
                                     <p className="component-description">{comp?.description}</p>
                                 </div>
                                 <div className="component-demo">
-                                    <div style={{ maxWidth: '428px', margin: '0 auto', padding: '16px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                                    <div className="mobile-demo-wrapper" style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
                                         <div>
                                             <MobileSectionHeader label="단일 칩 버튼 예제" />
                                             <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
@@ -4890,7 +4908,7 @@ function MyComponent() {
                                     <p className="component-description">{comp?.description}</p>
                                 </div>
                                 <div className="component-demo">
-                                    <div style={{ maxWidth: '428px', margin: '0 auto', padding: '16px' }}>
+                                    <div className="mobile-demo-wrapper" style={{ padding: '16px' }}>
                                         <MobileSectionHeader label="하차지 담당" required action="연락처 선택" onAction={() => alert('연락처 선택')} />
                                         <div style={{ display: 'flex', gap: '8px', marginBottom: '12px', overflowX: 'auto' }}>
                                             {contacts.map((name) => (
@@ -4950,7 +4968,7 @@ const [selectedContact, setSelectedContact] = useState('홍길동');
                                     <p className="component-description">{comp?.description}</p>
                                 </div>
                                 <div className="component-demo">
-                                    <div style={{ maxWidth: '428px', margin: '0 auto', padding: '16px' }}>
+                                    <div className="mobile-demo-wrapper" style={{ padding: '16px' }}>
                                         <MobileSectionHeader label="상차 방법" required />
                                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                                             <IconSelectButton
@@ -5006,7 +5024,7 @@ const [method, setMethod] = useState('지게차');
                                     <p className="component-description">{comp?.description}</p>
                                 </div>
                                 <div className="component-demo">
-                                    <div style={{ maxWidth: '428px', margin: '0 auto', padding: '16px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+                                    <div className="mobile-demo-wrapper" style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
                                         <div>
                                             <MobileSectionHeader label="기본 섹션 헤더" />
                                             <div style={{ padding: '12px', background: colors.gray[50], borderRadius: '8px' }}>
@@ -5064,7 +5082,7 @@ import { SectionHeader } from './components/mobile/SectionHeader';
                                     <p className="component-description">{comp?.description}</p>
                                 </div>
                                 <div className="component-demo">
-                                    <div style={{ maxWidth: '428px', margin: '0 auto', padding: '16px' }}>
+                                    <div className="mobile-demo-wrapper" style={{ padding: '16px' }}>
                                         <MobileSectionHeader label="하차 날짜 및 시간" required />
                                         <QuickSelectButtons
                                             options={['24시간 뒤', '48시간 뒤', '익일 오전']}
@@ -5111,7 +5129,7 @@ import { QuickSelectButtons } from './components/mobile/QuickSelectButtons';
                                     <p className="component-description">{comp?.description}</p>
                                 </div>
                                 <div className="component-demo">
-                                    <div style={{ maxWidth: '428px', margin: '0 auto', padding: '16px' }}>
+                                    <div className="mobile-demo-wrapper" style={{ padding: '16px' }}>
                                         <FavoriteLoadButton onClick={() => alert('즐겨찾기 불러오기')} />
                                         <div style={{ marginTop: '24px', padding: '16px', background: colors.gray[50], borderRadius: '8px' }}>
                                             <p style={{ fontSize: '14px', color: colors.gray[600], marginBottom: '8px' }}>사용 예시:</p>
@@ -5138,7 +5156,7 @@ import { FavoriteLoadButton } from './components/mobile/FavoriteLoadButton';
                     default:
                         return null;
                 }
-            }, [activeSection, inputValue, searchValue, checked1, checked2, modalOpen, currentPage, activeTab, favorited, selectedValue, textValue, dateValue, startDate, endDate, timeValue, listModalOpen, deviceView, mobileTabIndex, mobileChipSelected, mobileTemperature, mobileVehicleTypes, mobileDate, mobileTime, mobileSelectedContact, mobileLoadMethod]);
+            }, [activeSection, inputValue, searchValue, checked1, checked2, modalOpen, currentPage, activeTab, favorited, selectedValue, textValue, dateValue, startDate, endDate, timeValue, listModalOpen, deviceView, mobileTabIndex, mobileChipSelected, mobileTemperature, mobileVehicleTypes, mobileDate, mobileTime, mobileSelectedContact, mobileLoadMethod, mobileInputValue]);
 
             return (
                 <>
