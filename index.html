@@ -1821,6 +1821,16 @@
             const [timeValue, setTimeValue] = useState('');
             const [deviceView, setDeviceView] = useState('pc'); // 'pc' or 'mobile'
             
+            // 모바일 컴포넌트 상태 (Hooks 규칙 준수를 위해 최상위에 선언)
+            const [mobileTabIndex, setMobileTabIndex] = useState(0);
+            const [mobileChipSelected, setMobileChipSelected] = useState(false);
+            const [mobileTemperature, setMobileTemperature] = useState('상온');
+            const [mobileVehicleTypes, setMobileVehicleTypes] = useState([]);
+            const [mobileDate, setMobileDate] = useState('2023-08-01');
+            const [mobileTime, setMobileTime] = useState('16:00');
+            const [mobileSelectedContact, setMobileSelectedContact] = useState('홍길동');
+            const [mobileLoadMethod, setMobileLoadMethod] = useState('지게차');
+            
             // 카테고리 토글 함수
             const toggleCategory = (categoryId) => {
                 setExpandedCategories(prev => {
@@ -4580,7 +4590,6 @@ import { MobileHeader } from './components/mobile/MobileHeader';
                     }
                     case 'mobile-horizontal-tabs': {
                         const comp = allComponents.find(c => c.id === activeSection);
-                        const [tabIndex, setTabIndex] = useState(0);
                         const tabs = ['차량정보', '상차정보', '경유지', '하차정보', '부가정보'];
                         return (
                             <div className="component-section">
@@ -4590,7 +4599,7 @@ import { MobileHeader } from './components/mobile/MobileHeader';
                                 </div>
                                 <div className="component-demo">
                                     <div style={{ maxWidth: '428px', margin: '0 auto', border: `1px solid ${colors.gray[200]}`, borderRadius: '8px', overflow: 'hidden' }}>
-                                        <HorizontalTabs tabs={tabs} activeIndex={tabIndex} onChange={setTabIndex} />
+                                        <HorizontalTabs tabs={tabs} activeIndex={mobileTabIndex} onChange={setMobileTabIndex} />
                                     </div>
                                     <CodeExample code={`// HorizontalTabs 컴포넌트 사용 예제
 import { HorizontalTabs } from './components/mobile/HorizontalTabs';
@@ -4619,8 +4628,6 @@ function MyComponent() {
                     }
                     case 'mobile-chip-button-group': {
                         const comp = allComponents.find(c => c.id === activeSection);
-                        const [temperature, setTemperature] = useState('상온');
-                        const [vehicleTypes, setVehicleTypes] = useState([]);
                         return (
                             <div className="component-section">
                                 <div className="component-header">
@@ -4633,8 +4640,8 @@ function MyComponent() {
                                             <MobileSectionHeader label="온도 구분" required />
                                             <ChipButtonGroup
                                                 options={['상온', '냉장', '냉동']}
-                                                value={temperature}
-                                                onChange={setTemperature}
+                                                value={mobileTemperature}
+                                                onChange={setMobileTemperature}
                                                 columns={3}
                                             />
                                         </div>
@@ -4642,8 +4649,8 @@ function MyComponent() {
                                             <MobileSectionHeader label="차량 유형" required />
                                             <ChipButtonGroup
                                                 options={['카고', '탑차', '윙바디', '무관']}
-                                                value={vehicleTypes}
-                                                onChange={setVehicleTypes}
+                                                value={mobileVehicleTypes}
+                                                onChange={setMobileVehicleTypes}
                                                 columns={4}
                                                 multiSelect
                                             />
@@ -4736,8 +4743,6 @@ import { Phone } from 'lucide-react';
                     }
                     case 'mobile-datetime-picker': {
                         const comp = allComponents.find(c => c.id === activeSection);
-                        const [date, setDate] = useState('2023-08-01');
-                        const [time, setTime] = useState('16:00');
                         return (
                             <div className="component-section">
                                 <div className="component-header">
@@ -4750,13 +4755,13 @@ import { Phone } from 'lucide-react';
                                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                                             <MobileDateTimePicker
                                                 type="date"
-                                                value={date}
-                                                onChange={(e) => setDate(e.target.value)}
+                                                value={mobileDate}
+                                                onChange={(e) => setMobileDate(e.target.value)}
                                             />
                                             <MobileDateTimePicker
                                                 type="time"
-                                                value={time}
-                                                onChange={(e) => setTime(e.target.value)}
+                                                value={mobileTime}
+                                                onChange={(e) => setMobileTime(e.target.value)}
                                             />
                                         </div>
                                     </div>
@@ -4830,7 +4835,6 @@ import { BottomFixedButton } from './components/mobile/BottomFixedButton';
                     }
                     case 'mobile-chip-button': {
                         const comp = allComponents.find(c => c.id === activeSection);
-                        const [selected, setSelected] = useState(false);
                         return (
                             <div className="component-section">
                                 <div className="component-header">
@@ -4842,10 +4846,10 @@ import { BottomFixedButton } from './components/mobile/BottomFixedButton';
                                         <div>
                                             <MobileSectionHeader label="단일 칩 버튼 예제" />
                                             <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                                                <ChipButton selected={selected} onClick={() => setSelected(!selected)}>
+                                                <ChipButton selected={mobileChipSelected} onClick={() => setMobileChipSelected(!mobileChipSelected)}>
                                                     상온
                                                 </ChipButton>
-                                                <ChipButton selected={!selected} onClick={() => setSelected(!selected)}>
+                                                <ChipButton selected={!mobileChipSelected} onClick={() => setMobileChipSelected(!mobileChipSelected)}>
                                                     냉장
                                                 </ChipButton>
                                                 <ChipButton disabled>
@@ -4882,7 +4886,6 @@ function MyComponent() {
                     }
                     case 'mobile-contact-chip': {
                         const comp = allComponents.find(c => c.id === activeSection);
-                        const [selectedContact, setSelectedContact] = useState('홍길동');
                         const contacts = ['홍길동', '이순신', '김종서'];
                         return (
                             <div className="component-section">
@@ -4898,8 +4901,8 @@ function MyComponent() {
                                                 <ContactChip
                                                     key={name}
                                                     name={name}
-                                                    selected={selectedContact === name}
-                                                    onClick={() => setSelectedContact(name)}
+                                                    selected={mobileSelectedContact === name}
+                                                    onClick={() => setMobileSelectedContact(name)}
                                                 />
                                             ))}
                                         </div>
@@ -4944,7 +4947,6 @@ const [selectedContact, setSelectedContact] = useState('홍길동');
                     }
                     case 'mobile-icon-select': {
                         const comp = allComponents.find(c => c.id === activeSection);
-                        const [loadMethod, setLoadMethod] = useState('지게차');
                         return (
                             <div className="component-section">
                                 <div className="component-header">
@@ -4958,14 +4960,14 @@ const [selectedContact, setSelectedContact] = useState('홍길동');
                                             <IconSelectButton
                                                 icon="🚛"
                                                 label="지게차"
-                                                selected={loadMethod === '지게차'}
-                                                onClick={() => setLoadMethod('지게차')}
+                                                selected={mobileLoadMethod === '지게차'}
+                                                onClick={() => setMobileLoadMethod('지게차')}
                                             />
                                             <IconSelectButton
                                                 icon="👤"
                                                 label="수작업"
-                                                selected={loadMethod === '수작업'}
-                                                onClick={() => setLoadMethod('수작업')}
+                                                selected={mobileLoadMethod === '수작업'}
+                                                onClick={() => setMobileLoadMethod('수작업')}
                                             />
                                         </div>
                                     </div>
@@ -5140,7 +5142,7 @@ import { FavoriteLoadButton } from './components/mobile/FavoriteLoadButton';
                     default:
                         return null;
                 }
-            }, [activeSection, inputValue, searchValue, checked1, checked2, modalOpen, currentPage, activeTab, favorited, selectedValue, textValue, dateValue, startDate, endDate, timeValue, listModalOpen, deviceView]);
+            }, [activeSection, inputValue, searchValue, checked1, checked2, modalOpen, currentPage, activeTab, favorited, selectedValue, textValue, dateValue, startDate, endDate, timeValue, listModalOpen, deviceView, mobileTabIndex, mobileChipSelected, mobileTemperature, mobileVehicleTypes, mobileDate, mobileTime, mobileSelectedContact, mobileLoadMethod]);
 
             return (
                 <>
