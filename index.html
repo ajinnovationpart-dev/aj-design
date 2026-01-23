@@ -2079,10 +2079,6 @@
                 columns = 3,
                 multiSelect = false 
             }) => {
-                const [selectedValues, setSelectedValues] = useState(
-                    multiSelect ? (Array.isArray(value) ? value : []) : value
-                );
-
                 const gridStyle = {
                     display: 'grid',
                     gridTemplateColumns: `repeat(${columns}, 1fr)`,
@@ -2091,22 +2087,22 @@
 
                 const handleClick = (option) => {
                     if (multiSelect) {
-                        const newValues = selectedValues.includes(option)
-                            ? selectedValues.filter(v => v !== option)
-                            : [...selectedValues, option];
-                        setSelectedValues(newValues);
+                        const currentValues = Array.isArray(value) ? value : [];
+                        const newValues = currentValues.includes(option)
+                            ? currentValues.filter(v => v !== option)
+                            : [...currentValues, option];
                         if (onChange) onChange(newValues);
                     } else {
-                        setSelectedValues(option);
                         if (onChange) onChange(option);
                     }
                 };
 
                 const isSelected = (option) => {
                     if (multiSelect) {
-                        return selectedValues.includes(option);
+                        const currentValues = Array.isArray(value) ? value : [];
+                        return currentValues.includes(option);
                     }
-                    return selectedValues === option;
+                    return value === option;
                 };
 
                 return (
