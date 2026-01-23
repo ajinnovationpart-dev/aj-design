@@ -2518,18 +2518,27 @@
                 { id: 'info-section', name: 'InfoSection', category: 'layout', description: '정보 섹션 컴포넌트' },
                 
                 // 📱 모바일 전용 컴포넌트 (Mobile Components)
-                { id: 'mobile-header', name: 'MobileHeader', category: 'mobile', description: '모바일 헤더 (뒤로가기 + 타이틀)' },
-                { id: 'mobile-horizontal-tabs', name: 'HorizontalTabs', category: 'mobile', description: '가로 스크롤 탭 네비게이션' },
-                { id: 'mobile-chip-button', name: 'ChipButton', category: 'mobile', description: '칩 스타일 선택 버튼' },
-                { id: 'mobile-chip-button-group', name: 'ChipButtonGroup', category: 'mobile', description: '칩 버튼 그리드 그룹' },
-                { id: 'mobile-input', name: 'MobileInput', category: 'mobile', description: '모바일 최적화 입력 필드' },
-                { id: 'mobile-datetime-picker', name: 'MobileDateTimePicker', category: 'mobile', description: '날짜/시간 선택기' },
-                { id: 'mobile-contact-chip', name: 'ContactChip', category: 'mobile', description: '연락처 선택 칩' },
-                { id: 'mobile-icon-select', name: 'IconSelectButton', category: 'mobile', description: '아이콘 선택 버튼' },
-                { id: 'mobile-bottom-button', name: 'BottomFixedButton', category: 'mobile', description: '하단 고정 버튼' },
-                { id: 'mobile-section-header', name: 'SectionHeader', category: 'mobile', description: '섹션 헤더 with 액션' },
-                { id: 'mobile-quick-select', name: 'QuickSelectButtons', category: 'mobile', description: '빠른 선택 버튼' },
-                { id: 'mobile-favorite-load', name: 'FavoriteLoadButton', category: 'mobile', description: '즐겨찾기 불러오기 버튼' },
+                // 🧭 네비게이션 (Navigation)
+                { id: 'mobile-header', name: 'MobileHeader', category: 'mobile-navigation', description: '모바일 헤더 (뒤로가기 + 타이틀 + 우측 액션)' },
+                { id: 'mobile-horizontal-tabs', name: 'HorizontalTabs', category: 'mobile-navigation', description: '가로 스크롤 탭 네비게이션 (단계별 폼 분할)' },
+                
+                // ⌨️ 입력 (Input)
+                { id: 'mobile-input', name: 'MobileInput', category: 'mobile-input', description: '모바일 최적화 입력 필드 (터치 친화적, 아이콘 지원)' },
+                { id: 'mobile-datetime-picker', name: 'MobileDateTimePicker', category: 'mobile-input', description: '날짜/시간 선택기 (네이티브 피커 활용)' },
+                
+                // ✅ 선택 (Selection)
+                { id: 'mobile-chip-button', name: 'ChipButton', category: 'mobile-selection', description: '칩 스타일 선택 버튼 (단일 선택)' },
+                { id: 'mobile-chip-button-group', name: 'ChipButtonGroup', category: 'mobile-selection', description: '칩 버튼 그리드 그룹 (단일/다중 선택, 유동 그리드)' },
+                { id: 'mobile-contact-chip', name: 'ContactChip', category: 'mobile-selection', description: '연락처 선택 칩 (이름 칩 + 전화번호 표시)' },
+                { id: 'mobile-icon-select', name: 'IconSelectButton', category: 'mobile-selection', description: '아이콘 선택 버튼 (큰 아이콘 + 라벨, 2열 그리드)' },
+                { id: 'mobile-quick-select', name: 'QuickSelectButtons', category: 'mobile-selection', description: '빠른 선택 버튼 (프리셋 옵션, 가로 스크롤)' },
+                
+                // 🎨 레이아웃 (Layout)
+                { id: 'mobile-section-header', name: 'SectionHeader', category: 'mobile-layout', description: '섹션 헤더 (라벨 + 필수 표시 + 우측 액션 링크)' },
+                { id: 'mobile-bottom-button', name: 'BottomFixedButton', category: 'mobile-layout', description: '하단 고정 버튼 (Safe Area 고려, 전체 너비)' },
+                
+                // ⚡ 액션/편의 (Action/Utility)
+                { id: 'mobile-favorite-load', name: 'FavoriteLoadButton', category: 'mobile-action', description: '즐겨찾기 불러오기 버튼 (점선 테두리, 플러스 아이콘)' },
             ];
             
             // 카테고리 정보
@@ -2540,7 +2549,11 @@
                 { id: 'date-time', name: '날짜 및 시간', icon: '📅', color: colors.info },
                 { id: 'data-display', name: '데이터 표시', icon: '📊', color: colors.warning },
                 { id: 'layout', name: '레이아웃', icon: '🎨', color: colors.gray[600] },
-                { id: 'mobile', name: '모바일 전용', icon: '📱', color: '#5A7CF0' },
+                { id: 'mobile-navigation', name: '모바일 - 네비게이션', icon: '🧭', color: '#5A7CF0' },
+                { id: 'mobile-input', name: '모바일 - 입력', icon: '⌨️', color: '#10B981' },
+                { id: 'mobile-selection', name: '모바일 - 선택', icon: '✅', color: '#F59E0B' },
+                { id: 'mobile-layout', name: '모바일 - 레이아웃', icon: '🎨', color: '#8B5CF6' },
+                { id: 'mobile-action', name: '모바일 - 액션/편의', icon: '⚡', color: '#EF4444' },
             ];
 
             const components = [
